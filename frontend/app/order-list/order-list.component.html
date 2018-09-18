@@ -1,7 +1,16 @@
 <h1>Orders</h1>
 
-<table>
-  <td>
-    No orders loaded.
-  </td>
-</table>
+<!-- Would add an initial loading spinner here -->
+
+<app-order-list-item
+  *ngFor="let order of (orders$ | async)"
+  [order]="order">
+</app-order-list-item>
+
+<!-- Would add an error handling component here -->
+
+<div *ngIf="!(isLastPage$ | async)">
+  <button id="btn-load-more" (click)="loadMore()" [class.has-spinner]="isLoading$ | async" class="button">
+    Load more
+  </button>
+</div>

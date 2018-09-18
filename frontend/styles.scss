@@ -1,1 +1,95 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  color: #3d3d41;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Roboto', Arial, sans-serif;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 50px 0;
+}
+
+a {
+  font-weight: 700;
+  border-bottom: 2px solid #222;
+  text-decoration: none;
+  color: #222;
+
+  &:hover {
+    border-bottom-color: transparent;
+  }
+}
+
+.text-strong {
+  font-weight: 700 !important;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 95%;
+}
+
+.button {
+  display: inline-flex;
+  padding: 1rem 2rem;
+  background: #fff200;
+  color: #2a2d3a;
+  border: 0 none;
+  font-weight: 700;
+  font-size: 1.25rem;
+  font-family: inherit;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &.has-spinner:after {
+    margin-left: 1rem;
+    content: '';
+    display: inline-flex;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid #2a2d3a;
+    border-left-color: transparent !important;
+    animation: rotateClockwise 0.6s linear infinite;
+  }
+
+  &:hover {
+    background: #2a2d3a;
+    color: #fff;
+
+    &.has-spinner:after {
+      border-color: #fff;
+    }
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tr:not(:last-child) {
+    border-bottom: 1px solid #eee;
+  }
+
+  td {
+    padding: .5em 0;
+  }
+}
+
+@keyframes rotateClockwise {
+  to {
+    transform: rotate(360deg);
+  }
+}

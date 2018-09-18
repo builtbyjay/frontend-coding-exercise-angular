@@ -1,0 +1,80 @@
+<h2 class="heading">
+  {{ order.customer }}
+  <span class="heading__muted">has ordered from</span>
+  {{ order.vendor }}
+</h2>
+
+<div class="flex">
+
+  <section class="info-section customer-info">
+    <ul class="customer-info__list">
+      <li>
+        <a target="_blank" href="https://www.google.com/maps/?q={{ order.deliveryLocation.lat }},{{ order.deliveryLocation.long }}">
+          <i class="fa fa-map-marker-alt"></i>
+          Delivery location
+        </a>
+      </li>
+      <li>
+        <i class="far fa-user"></i>
+        {{ order.headcount }}
+      </li>
+      <li>
+        <i class="far fa-clock"></i>
+        {{ order.requestedDeliveryDate | date:'hh:mm' }}
+      </li>
+      <li>
+        <i class="far fa-calendar"></i>
+        {{ order.requestedDeliveryDate | date:'EEE d MMM y' }}
+      </li>
+    </ul>
+  </section>
+
+  <section class="info-section delivery-info">
+    <h3 class="sub-heading">Delivery information</h3>
+    <ul>
+      <li>
+        <i class="far fa-address-card"></i>
+        {{ order.driverName }}
+      </li>
+      <li *ngIf="order.deliveredAt">
+        <i class="fas fa-check"></i>
+        Delivered at {{ order.deliveredAt | date:'hh:mm, EEE d MMM y' }}
+      </li>
+      <li *ngIf="order.delayMinutes > 0" class="late-text">
+          <i class="far fa-clock"></i>
+        {{ order.delayMinutes }} minutes late
+        <span *ngIf="order.lateReason === 'VENDOR_LATE'">
+          (vendor was late)
+        </span>
+        <span *ngIf="order.lateReason === 'TRAFFIC'">
+          (traffic)
+        </span>
+        <span *ngIf="order.lateReason === 'DRIVER_LATE_FOR_PICKUP'">
+          (driver late for pick-up)
+        </span>
+        <span *ngIf="order.lateReason === 'BAD_INSTRUCTIONS'">
+          (bad instructions)
+        </span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="info-section order-info">
+    <h3 class="sub-heading">Order information</h3>
+    <table class="table">
+      <tr>
+        <td>Delivery</td>
+        <td>{{ order.price.delivery | currency:'GBP' }}</td>
+      </tr>
+      <tr>
+        <td>VAT ({{ order.price.vatRate }}%)</td>
+        <td>{{ order.price.vatAmount | currency:'GBP' }}</td>
+      </tr>
+      <tr class="text-strong">
+        <td>Total</td>
+        <td>{{ order.price.total | currency:'GBP' }}</td>
+      </tr>
+    </table>
+  </section>
+
+</div>
